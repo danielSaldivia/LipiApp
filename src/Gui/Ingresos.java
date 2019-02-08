@@ -5,7 +5,7 @@
  */
 package Gui;
 
-import Controller.ClienteJpaController;
+import controlladores.ClienteJpaController;
 import Data.Cliente;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -83,7 +83,6 @@ public class Ingresos extends javax.swing.JFrame {
         tf_domicilio = new javax.swing.JTextField();
         tf_valor = new javax.swing.JTextField();
         tf_fecha = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -107,10 +106,11 @@ public class Ingresos extends javax.swing.JFrame {
         tf_15kc = new javax.swing.JTextField();
         tf_45kc = new javax.swing.JTextField();
         tf_11kc = new javax.swing.JTextField();
-        bt_save = new javax.swing.JButton();
+        bt_guardar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla_cliente = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
+        bt_eliminar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -135,18 +135,18 @@ public class Ingresos extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel10)
-                .addGap(53, 53, 53)
-                .addComponent(tf_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(62, 62, 62)
+                .addComponent(tf_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(bt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(tf_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,13 +194,13 @@ public class Ingresos extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tf_factura, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(tf_fecha)
-                    .addComponent(tf_rut)
+                    .addComponent(tf_rut, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                     .addComponent(tf_nombre)
                     .addComponent(tf_domicilio)
-                    .addComponent(tf_valor))
-                .addContainerGap(59, Short.MAX_VALUE))
+                    .addComponent(tf_valor)
+                    .addComponent(tf_factura)
+                    .addComponent(tf_fecha))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,17 +230,6 @@ public class Ingresos extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(tf_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 524, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -388,29 +377,29 @@ public class Ingresos extends javax.swing.JFrame {
                     .addComponent(tf_11kc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        bt_save.setText("Guardar");
-        bt_save.addActionListener(new java.awt.event.ActionListener() {
+        bt_guardar.setText("Guardar Información");
+        bt_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_saveActionPerformed(evt);
+                bt_guardarActionPerformed(evt);
             }
         });
 
         Tabla_cliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Fecha", "N° Factura", "RUT", "Nombre", "Domicilio", "Valor Factura", "5k", "11k", "15k", "45k", "15k Al", "15k FE", "5K C", "11k C", "15k C", "45kC"
+                "ID", "Fecha", "N° Factura", "RUT", "Nombre", "Domicilio", "Valor Factura", "5k", "11k", "15k", "45k", "15k Al", "15k FE", "5K C", "11k C", "15k C", "45kC"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -421,16 +410,22 @@ public class Ingresos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabla_cliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabla_clienteMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(Tabla_cliente);
         if (Tabla_cliente.getColumnModel().getColumnCount() > 0) {
             Tabla_cliente.getColumnModel().getColumn(0).setResizable(false);
             Tabla_cliente.getColumnModel().getColumn(0).setPreferredWidth(5);
             Tabla_cliente.getColumnModel().getColumn(1).setResizable(false);
+            Tabla_cliente.getColumnModel().getColumn(1).setPreferredWidth(5);
             Tabla_cliente.getColumnModel().getColumn(2).setResizable(false);
             Tabla_cliente.getColumnModel().getColumn(3).setResizable(false);
+            Tabla_cliente.getColumnModel().getColumn(4).setResizable(false);
             Tabla_cliente.getColumnModel().getColumn(5).setResizable(false);
             Tabla_cliente.getColumnModel().getColumn(6).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(6).setPreferredWidth(5);
             Tabla_cliente.getColumnModel().getColumn(7).setResizable(false);
             Tabla_cliente.getColumnModel().getColumn(7).setPreferredWidth(5);
             Tabla_cliente.getColumnModel().getColumn(8).setResizable(false);
@@ -449,16 +444,23 @@ public class Ingresos extends javax.swing.JFrame {
             Tabla_cliente.getColumnModel().getColumn(14).setPreferredWidth(5);
             Tabla_cliente.getColumnModel().getColumn(15).setResizable(false);
             Tabla_cliente.getColumnModel().getColumn(15).setPreferredWidth(5);
+            Tabla_cliente.getColumnModel().getColumn(16).setResizable(false);
+            Tabla_cliente.getColumnModel().getColumn(16).setPreferredWidth(5);
         }
+
+        bt_eliminar.setText("Eliminar Información ");
+        bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_eliminarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Editar Información");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -483,15 +485,25 @@ public class Ingresos extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(557, 557, 557)
-                        .addComponent(bt_save))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 718, Short.MAX_VALUE))
+                        .addGap(300, 300, 300)
+                        .addComponent(bt_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 421, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -508,50 +520,44 @@ public class Ingresos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bt_save)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_guardar)
+                    .addComponent(bt_eliminar)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
         );
-
-        jLabel8.setText("Listado de Clientes");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(345, 345, 345)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1587, 1587, 1587)
-                        .addComponent(jLabel8))
+                        .addGap(322, 322, 322)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(339, 339, 339)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -566,44 +572,29 @@ public class Ingresos extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_valorKeyTyped
 
     private void bt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_buscarActionPerformed
-        
-        
-        if (tf_buscar.getText().length() >= 8 & tf_buscar.getText().length() <= 9) {
-            try {
-                EntityManagerFactory emf = Persistence.createEntityManagerFactory("LipiAppPU");
-                EntityManager em = emf.createEntityManager();
-                Cliente cli = new Cliente();
 
-                TypedQuery<Cliente> consultaCliente = em.createNamedQuery("Cliente.findByRut", Cliente.class);
-                consultaCliente.setParameter("rut", tf_buscar.getText());
-                List<Cliente> lista = consultaCliente.getResultList();
-
-                cli = lista.get(0);
-
-                tf_rut.setText(cli.getRut());
-                tf_nombre.setText(cli.getNombre());
-                tf_domicilio.setText(cli.getDomicilio());
-
-            } catch (Exception e) {
-                if (e.equals(e)) {
-                    JOptionPane.showMessageDialog(this, "No existe Informacion! " + e.getMessage());
-                }
-            }
-        }else if (tf_buscar.getText().length() <= 0){
-            
-            JOptionPane.showMessageDialog(this, "Ingrese un rut a buscar");
-
-        } else  if ((tf_buscar.getText().length() <= 6)){
-            JOptionPane.showMessageDialog(this, "Ingrese entre 8 y 9 carácteres");
-        }
+        Buscar_info();
 
     }//GEN-LAST:event_bt_buscarActionPerformed
 
-    private void bt_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveActionPerformed
+    private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
+        eliminar();
+        mostrarTabla();
+    }//GEN-LAST:event_bt_eliminarActionPerformed
+
+    private void Tabla_clienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_clienteMouseClicked
+
+    }//GEN-LAST:event_Tabla_clienteMouseClicked
+
+    private void bt_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarActionPerformed
 
         Enviar_informacion();
         mostrarTabla();
-    }//GEN-LAST:event_bt_saveActionPerformed
+    }//GEN-LAST:event_bt_guardarActionPerformed
+
+    private void tf_11kcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_11kcKeyTyped
+        soloNumeros(evt);
+    }//GEN-LAST:event_tf_11kcKeyTyped
 
     private void tf_45kcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_45kcKeyTyped
         soloNumeros(evt);
@@ -612,10 +603,6 @@ public class Ingresos extends javax.swing.JFrame {
     private void tf_15kcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_15kcKeyTyped
         soloNumeros(evt);
     }//GEN-LAST:event_tf_15kcKeyTyped
-
-    private void tf_11kcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_11kcKeyTyped
-        soloNumeros(evt);
-    }//GEN-LAST:event_tf_11kcKeyTyped
 
     private void tf_5kcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_5kcKeyTyped
         soloNumeros(evt);
@@ -714,30 +701,31 @@ public class Ingresos extends javax.swing.JFrame {
         /* hace referencia a mostrar los ingreso diario en la tabla */
         try {
 
-            String[] columnas = {"fecha", "N°factura", "Rut", "Nombre", "Domicilio", "Valor Factura", "5k", "11k",
+            String[] columnas = {"ID","fecha", "N°factura", "Rut", "Nombre", "Domicilio", "Valor Factura", "5k", "11k",
                 "15k", "45k", "15k Al", "15k Fe", "5k C", "11k C", "15k C", "45k C"};
-            Object[] obj = new Object[16];
+            Object[] obj = new Object[17];
             DefaultTableModel tabla = new DefaultTableModel(null, columnas);
             Cliente cli = new Cliente();
             List<Cliente> uni = query1.getResultList();
             for (int i = 0; i < uni.size(); i++) {
-                cli = (Cliente) uni.get(i);
-                obj[0] = cli.getFecha();
-                obj[1] = cli.getFactura();
-                obj[2] = cli.getRut();
-                obj[3] = cli.getNombre();
-                obj[4] = cli.getDomicilio();
-                obj[5] = cli.getValorFactura();
-                obj[6] = cli.getK();
-                obj[7] = cli.getK1();
-                obj[8] = cli.getK2();
-                obj[9] = cli.getK3();
-                obj[10] = cli.getKAl();
-                obj[11] = cli.getKFe();
-                obj[12] = cli.getKCat();
-                obj[13] = cli.getKCat1();
-                obj[14] = cli.getKCat2();
-                obj[15] = cli.getKCat3();
+                cli = (Cliente) uni.get(i);       
+                obj[0]  = cli.getId();
+                obj[1] = cli.getFecha();
+                obj[2] = cli.getFactura();
+                obj[3] = cli.getRut();
+                obj[4] = cli.getNombre();
+                obj[5] = cli.getDomicilio();
+                obj[6] = cli.getValorFactura();
+                obj[7] = cli.getK();
+                obj[8] = cli.getK1();
+                obj[9] = cli.getK2();
+                obj[10] = cli.getK3();
+                obj[11] = cli.getKAl();
+                obj[12] = cli.getKFe();
+                obj[13] = cli.getKCat();
+                obj[14] = cli.getKCat1();
+                obj[15] = cli.getKCat2();
+                obj[16] = cli.getKCat3();
                 tabla.addRow(obj);
 
             }
@@ -786,12 +774,95 @@ public class Ingresos extends javax.swing.JFrame {
 
         }
     }
+
+    public void Buscar_info() {
+        if (tf_buscar.getText().length() >= 8 & tf_buscar.getText().length() <= 10) {
+            try {
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("LipiAppPU");
+                EntityManager em = emf.createEntityManager();
+                Cliente cli = new Cliente();
+
+                TypedQuery<Cliente> consultaCliente = em.createNamedQuery("Cliente.findByRut", Cliente.class);
+                consultaCliente.setParameter("rut", tf_buscar.getText());
+                List<Cliente> lista = consultaCliente.getResultList();
+
+                cli = lista.get(0);
+
+                tf_rut.setText(cli.getRut());
+                tf_nombre.setText(cli.getNombre());
+                tf_domicilio.setText(cli.getDomicilio());
+
+            } catch (Exception e) {
+                if (e.equals(e)) {
+                    JOptionPane.showMessageDialog(this, "No existe Informacion! " + e.getMessage());
+                }
+            }
+        } else if (tf_buscar.getText().length() <= 0) {
+
+            JOptionPane.showMessageDialog(this, "Ingrese un rut a buscar");
+
+        } else if ((tf_buscar.getText().length() <= 6)) {
+            JOptionPane.showMessageDialog(this, "Ingrese entre 8 y 10 carácteres");
+        }
+    }
+
+    public void eliminar(){
+     try {
+     Integer id = (Integer) Tabla_cliente.getValueAt(Tabla_cliente.getSelectedRow(), 0);     
+     ClienteJpaController prd = new ClienteJpaController(Entity.getEntityManagerFactory());
+            int Confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+              if (Confirmacion == 0) {
+                    if (id != null) {
+                        prd.destroy(id);
+                        this.mostrarTabla();
+                        JOptionPane.showMessageDialog(null, "Se ha eliminado el Registro");
+
+                    } 
+                }
+      } catch (Exception e) {
+              JOptionPane.showMessageDialog(this, "Seleccione un cliente en el listado, posteriormente aprete el boton eliminar");
+            }
+    }
+    
+   /* public void modificarProducto() {
+        
+        ClienteJpaController unid = new ClienteJpaController(Entity.getEntityManagerFactory());
+        Cliente li = new Cliente();
+        try {
+            
+            if(tf_descrip.getText().length() == 0 ){
+                JOptionPane.showMessageDialog(null, "Campos  vacios");        
+            }else{
+            li= unid.findLinea(Integer.parseInt(jl_id.getText()));
+            li.setLineNombre(this.tf_descrip.getText().toString());
+           
+            int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if (SioNo == 0) {
+
+                unid.edit(li);
+                JOptionPane.showMessageDialog(this, "Datos modificados correctamente");
+            } else {
+                limpiar();
+            }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se a selecionado elemento a modifcar");
+            e.printStackTrace();
+        }
+        limpiar();
+       mostrarTabla();
+       
+    }*/
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.Query Consulta;
     private javax.persistence.EntityManager Entity;
     private javax.swing.JTable Tabla_cliente;
     private javax.swing.JButton bt_buscar;
-    private javax.swing.JButton bt_save;
+    private javax.swing.JButton bt_eliminar;
+    private javax.swing.JButton bt_guardar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -810,10 +881,8 @@ public class Ingresos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
