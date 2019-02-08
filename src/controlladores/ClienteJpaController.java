@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package controlladores;
 
-import Controller.exceptions.NonexistentEntityException;
 import Data.Cliente;
+import controlladores.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Theking
+ * @author Daniel
  */
 public class ClienteJpaController implements Serializable {
 
