@@ -31,10 +31,10 @@ public class Ingresos extends javax.swing.JFrame {
      */
     public Ingresos() {
         initComponents();
-        
+
         Image icon = new ImageIcon(getClass().getResource("/img/icon.jpg")).getImage();
         setIconImage(icon);
-        
+
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         limpiar();
@@ -643,18 +643,18 @@ public class Ingresos extends javax.swing.JFrame {
                 c = jpa.findCliente(id);
                 cargarCliente(c);
             } else {
-                JOptionPane.showMessageDialog(null,"Seleccione un registro de la lista");
+                JOptionPane.showMessageDialog(null, "Seleccione un registro de la lista");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Seleccione un registro de la lista"+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Seleccione un registro de la lista" + e.getMessage());
         }
     }//GEN-LAST:event_bt_editarActionPerformed
 
     private void bt_guardarcambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarcambiosActionPerformed
         Object[] opciones = {"Guardar", "Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(rootPane, "¿Desea guardar cambios?", "Mensaje de Confirmacion",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
         if (eleccion == JOptionPane.YES_OPTION) {
             try {
                 ClienteJpaController clienteController = new ClienteJpaController(Entity.getEntityManagerFactory());
@@ -679,7 +679,6 @@ public class Ingresos extends javax.swing.JFrame {
                 clienteController.edit(cli);
                 mostrarTabla();
                 limpiar();
-                System.out.println(cli.toString());
                 bt_guardarcambios.setEnabled(false);
                 bt_guardar.setEnabled(true);
                 bt_editar.setEnabled(true);
@@ -692,78 +691,81 @@ public class Ingresos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_bt_guardarcambiosActionPerformed
-    
+
     public void mostrarTabla() {
-    /* hace referencia a mostrar los ingreso diario en la tabla */
-    try {
-        DefaultTableModel modelo;
+        /* hace referencia a mostrar los ingreso diario en la tabla */
+        try {
+            DefaultTableModel modelo;
 
-        modelo = (new DefaultTableModel(null, new String [] {"ID","Fecha","N°Factura","RUT","Nombre","Domicilio","Valor","5k","11k","15k","45k","15k Al","15k Fe","5k C","11k C","15k C","45k C"}){
-            Class[] types = new Class [] {java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class};
-            boolean[] canEdit = new boolean [] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false};
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            modelo = (new DefaultTableModel(null, new String[]{"ID", "Fecha", "N°Factura", "RUT", "Nombre", "Domicilio", "Valor", "5k", "11k", "15k", "45k", "15k Al", "15k Fe", "5k C", "11k C", "15k C", "45k C"}) {
+                Class[] types = new Class[]{java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class};
+                boolean[] canEdit = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            Tabla_cliente.setModel(modelo);
+            Tabla_cliente.getColumnModel().getColumn(0).setPreferredWidth(60);
+            Tabla_cliente.getColumnModel().getColumn(1).setPreferredWidth(80);
+            Tabla_cliente.getColumnModel().getColumn(2).setPreferredWidth(90);
+            Tabla_cliente.getColumnModel().getColumn(3).setPreferredWidth(100);
+            Tabla_cliente.getColumnModel().getColumn(4).setPreferredWidth(200);
+            Tabla_cliente.getColumnModel().getColumn(5).setPreferredWidth(200);
+            Tabla_cliente.getColumnModel().getColumn(6).setPreferredWidth(80);
+            Tabla_cliente.getColumnModel().getColumn(7).setPreferredWidth(50);
+            Tabla_cliente.getColumnModel().getColumn(8).setPreferredWidth(50);
+            Tabla_cliente.getColumnModel().getColumn(9).setPreferredWidth(50);
+            Tabla_cliente.getColumnModel().getColumn(10).setPreferredWidth(50);
+            Tabla_cliente.getColumnModel().getColumn(11).setPreferredWidth(50);
+            Tabla_cliente.getColumnModel().getColumn(12).setPreferredWidth(50);
+            Tabla_cliente.getColumnModel().getColumn(13).setPreferredWidth(50);
+            Tabla_cliente.getColumnModel().getColumn(14).setPreferredWidth(50);
+            Tabla_cliente.getColumnModel().getColumn(15).setPreferredWidth(50);
+            Tabla_cliente.getColumnModel().getColumn(16).setPreferredWidth(50);
+            Object[] obj = new Object[17];
+            ClienteJpaController jpa = new ClienteJpaController(Entity.getEntityManagerFactory());
+
+            List<Cliente> uni = jpa.findClienteEntities();
+            Cliente cli = new Cliente();
+
+            for (int i = 0; i < uni.size(); i++) {
+                cli = (Cliente) uni.get(i);
+                obj[0] = cli.getId();
+                obj[1] = cli.getFecha();
+                obj[2] = cli.getFactura();
+                obj[3] = cli.getRut();
+                obj[4] = cli.getNombre();
+                obj[5] = cli.getDomicilio();
+                obj[6] = cli.getValorFactura();
+                obj[7] = cli.getK();
+                obj[8] = cli.getK1();
+                obj[9] = cli.getK2();
+                obj[10] = cli.getK3();
+                obj[11] = cli.getKAl();
+                obj[12] = cli.getKFe();
+                obj[13] = cli.getKCat();
+                obj[14] = cli.getKCat1();
+                obj[15] = cli.getKCat2();
+                obj[16] = cli.getKCat3();
+                modelo.addRow(obj);
             }
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex){
-                return canEdit [colIndex];}
-        });
-        Tabla_cliente.setModel(modelo);
-        Tabla_cliente.getColumnModel().getColumn(0).setPreferredWidth(60);
-        Tabla_cliente.getColumnModel().getColumn(1).setPreferredWidth(80);
-        Tabla_cliente.getColumnModel().getColumn(2).setPreferredWidth(90);
-        Tabla_cliente.getColumnModel().getColumn(3).setPreferredWidth(100);
-        Tabla_cliente.getColumnModel().getColumn(4).setPreferredWidth(200);
-        Tabla_cliente.getColumnModel().getColumn(5).setPreferredWidth(200);
-        Tabla_cliente.getColumnModel().getColumn(6).setPreferredWidth(80);
-        Tabla_cliente.getColumnModel().getColumn(7).setPreferredWidth(50);
-        Tabla_cliente.getColumnModel().getColumn(8).setPreferredWidth(50);
-        Tabla_cliente.getColumnModel().getColumn(9).setPreferredWidth(50);
-        Tabla_cliente.getColumnModel().getColumn(10).setPreferredWidth(50);
-        Tabla_cliente.getColumnModel().getColumn(11).setPreferredWidth(50);
-        Tabla_cliente.getColumnModel().getColumn(12).setPreferredWidth(50);
-        Tabla_cliente.getColumnModel().getColumn(13).setPreferredWidth(50);
-        Tabla_cliente.getColumnModel().getColumn(14).setPreferredWidth(50);
-        Tabla_cliente.getColumnModel().getColumn(15).setPreferredWidth(50);
-        Tabla_cliente.getColumnModel().getColumn(16).setPreferredWidth(50);
-        Object[] obj = new Object[17];
-        ClienteJpaController jpa = new ClienteJpaController(Entity.getEntityManagerFactory());
-
-        List<Cliente> uni = jpa.findClienteEntities();
-        Cliente cli = new Cliente();
-
-        for (int i = 0; i < uni.size(); i++) {
-            cli = (Cliente) uni.get(i);       
-            obj[0]  = cli.getId();
-            obj[1] = cli.getFecha();
-            obj[2] = cli.getFactura();
-            obj[3] = cli.getRut();
-            obj[4] = cli.getNombre();
-            obj[5] = cli.getDomicilio();
-            obj[6] = cli.getValorFactura();
-            obj[7] = cli.getK();
-            obj[8] = cli.getK1();
-            obj[9] = cli.getK2();
-            obj[10] = cli.getK3();
-            obj[11] = cli.getKAl();
-            obj[12] = cli.getKFe();
-            obj[13] = cli.getKCat();
-            obj[14] = cli.getKCat1();
-            obj[15] = cli.getKCat2();
-            obj[16] = cli.getKCat3();
-            modelo.addRow(obj);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e.getMessage());
     }
-}
 
     public void Enviar_informacion() {
         Object[] opciones = {"Enviar", "Revisar"};
         int eleccion = JOptionPane.showOptionDialog(rootPane, "¿Desea Enviar la  Información?", "Mensaje de Confirmacion",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
         if (eleccion == JOptionPane.YES_OPTION) {
             try {
                 ClienteJpaController clienteController = new ClienteJpaController(Entity.getEntityManagerFactory());
@@ -799,8 +801,9 @@ public class Ingresos extends javax.swing.JFrame {
     }
 
     public void buscar_cliente() {
-        if (tf_buscar.getText().length() >= 8 & tf_buscar.getText().length() <= 10) {
-            try {
+        try {
+            if (tf_buscar.getText().length() >= 8 & tf_buscar.getText().length() <= 10) {
+
                 EntityManagerFactory emf = Persistence.createEntityManagerFactory("LipiAppPU");
                 EntityManager em = emf.createEntityManager();
                 Cliente cli = new Cliente();
@@ -815,38 +818,38 @@ public class Ingresos extends javax.swing.JFrame {
                 tf_nombre.setText(cli.getNombre());
                 tf_domicilio.setText(cli.getDomicilio());
 
-            } catch (Exception e) {
-                if (e.equals(e)) {
-                    JOptionPane.showMessageDialog(this, "No existe Informacion! " + e.getMessage());
-                }
+            } else if (tf_buscar.getText().length() <= 0) {
+
+                JOptionPane.showMessageDialog(this, "Ingrese un RUT a buscar");
+
+            } else if ((tf_buscar.getText().length() <= 6)) {
+                JOptionPane.showMessageDialog(this, "Ingrese entre 8 y 10 carácteres");
             }
-        } else if (tf_buscar.getText().length() <= 0) {
-
-            JOptionPane.showMessageDialog(this, "Ingrese un RUT a buscar");
-
-        } else if ((tf_buscar.getText().length() <= 6)) {
-            JOptionPane.showMessageDialog(this, "Ingrese entre 8 y 10 carácteres");
+        } catch (Exception e) {
+            if (e.equals(e)) {
+                JOptionPane.showMessageDialog(this, "No existe Informacion! ");
+            }
         }
     }
 
-    public void eliminar(){
+    public void eliminar() {
         try {
-            Integer id = (Integer) Tabla_cliente.getValueAt(Tabla_cliente.getSelectedRow(), 0);     
+            Integer id = (Integer) Tabla_cliente.getValueAt(Tabla_cliente.getSelectedRow(), 0);
             ClienteJpaController prd = new ClienteJpaController(Entity.getEntityManagerFactory());
             int Confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-              if (Confirmacion == 0) {
-                    if (id != null) {
-                        prd.destroy(id);
-                        this.mostrarTabla();
-                        JOptionPane.showMessageDialog(null, "Se ha eliminado el Registro");
-                    } 
+            if (Confirmacion == 0) {
+                if (id != null) {
+                    prd.destroy(id);
+                    this.mostrarTabla();
+                    JOptionPane.showMessageDialog(null, "Se ha eliminado el Registro");
                 }
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Seleccione un registro en el listado antes de eliminar");
         }
     }
 
-    public void cargarCliente(Cliente c){
+    public void cargarCliente(Cliente c) {
         lb_id.setText(c.getId().toString());
         tf_fecha.setText(c.getFecha());
         tf_factura.setText(c.getFactura());
@@ -865,7 +868,7 @@ public class Ingresos extends javax.swing.JFrame {
         tf_15kc.setText(c.getKCat2());
         tf_45kc.setText(c.getKCat3());
     }
-    
+
     public void limpiar() {
         Date fecha = new Date();
         SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
@@ -887,7 +890,7 @@ public class Ingresos extends javax.swing.JFrame {
         tf_15kc.setText("0");
         tf_45kc.setText("0");
     }
-    
+
     public void soloNumeros(java.awt.event.KeyEvent evt) {
         char validar = evt.getKeyChar();
         if (Character.isLetter(validar)) {
@@ -896,7 +899,7 @@ public class Ingresos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Ingresa sólo digitos");
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
