@@ -7,6 +7,7 @@ package Gui;
 
 import controlladores.ClienteJpaController;
 import Data.Cliente;
+import java.awt.Image;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -29,6 +31,10 @@ public class Ingresos extends javax.swing.JFrame {
      */
     public Ingresos() {
         initComponents();
+        
+        Image icon = new ImageIcon(getClass().getResource("/img/icon.jpg")).getImage();
+        setIconImage(icon);
+        
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         limpiar();
@@ -625,28 +631,28 @@ public class Ingresos extends javax.swing.JFrame {
 
     private void bt_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_editarActionPerformed
         try {
-            bt_guardarcambios.setEnabled(true);
-            bt_guardar.setEnabled(false);
-            bt_editar.setEnabled(false);
-            bt_eliminar.setEnabled(false);
             ClienteJpaController jpa = new ClienteJpaController(em.getEntityManagerFactory());
             int select = Tabla_cliente.getSelectedRow();
             if (select != -1) {
+                bt_guardarcambios.setEnabled(true);
+                bt_guardar.setEnabled(false);
+                bt_editar.setEnabled(false);
+                bt_eliminar.setEnabled(false);
                 int id = Integer.parseInt(Tabla_cliente.getValueAt(Tabla_cliente.getSelectedRow(), 0).toString());
                 Cliente c = new Cliente();
                 c = jpa.findCliente(id);
                 cargarCliente(c);
             } else {
-                JOptionPane.showMessageDialog(null,"Seleccione correctamente!");
+                JOptionPane.showMessageDialog(null,"Seleccione un registro de la lista");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Seleccione correctamente! "+e.getMessage());
+            JOptionPane.showMessageDialog(null,"Seleccione un registro de la lista"+e.getMessage());
         }
     }//GEN-LAST:event_bt_editarActionPerformed
 
     private void bt_guardarcambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarcambiosActionPerformed
-        Object[] opciones = {"Guardar", "Revisar"};
-        int eleccion = JOptionPane.showOptionDialog(rootPane, "¿Desea Enviar la  Información?", "Mensaje de Confirmacion",
+        Object[] opciones = {"Guardar", "Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(rootPane, "¿Desea guardar cambios?", "Mensaje de Confirmacion",
         JOptionPane.YES_NO_OPTION,
         JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
         if (eleccion == JOptionPane.YES_OPTION) {
@@ -816,7 +822,7 @@ public class Ingresos extends javax.swing.JFrame {
             }
         } else if (tf_buscar.getText().length() <= 0) {
 
-            JOptionPane.showMessageDialog(this, "Ingrese un rut a buscar");
+            JOptionPane.showMessageDialog(this, "Ingrese un RUT a buscar");
 
         } else if ((tf_buscar.getText().length() <= 6)) {
             JOptionPane.showMessageDialog(this, "Ingrese entre 8 y 10 carácteres");
@@ -887,7 +893,7 @@ public class Ingresos extends javax.swing.JFrame {
         if (Character.isLetter(validar)) {
             getToolkit().beep();
             evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Puedes Ingresar solo digitos");
+            JOptionPane.showMessageDialog(rootPane, "Ingresa sólo digitos");
         }
     }
     
