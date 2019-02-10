@@ -29,24 +29,9 @@ public class Ingresos extends javax.swing.JFrame {
      */
     public Ingresos() {
         initComponents();
-        Date date = new Date();
-
-        this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.setVisible(true);
-
-        SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
-        tf_fecha.setText(dt1.format(date));
-        tf_5k.setText("0");
-        tf_11k.setText("0");
-        tf_15k.setText("0");
-        tf_45k.setText("0");
-        tf_15kal.setText("0");
-        tf_15kFe.setText("0");
-        tf_5kc.setText("0");
-        tf_11kc.setText("0");
-        tf_15kc.setText("0");
-        tf_45kc.setText("0");
+        limpiar();
         mostrarTabla();
     }
 
@@ -118,7 +103,6 @@ public class Ingresos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LipiApp");
         setName("Ingreso de clientes"); // NOI18N
-        setResizable(false);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabel10.setText("Buscar Cliente");
@@ -140,10 +124,10 @@ public class Ingresos extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lb_id, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(lb_id, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,23 +143,23 @@ public class Ingresos extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(193, 193, 193)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(tf_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(76, 76, 76)
+                .addComponent(tf_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(bt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(tf_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt_buscar))
-                .addContainerGap())
+                .addGap(14, 14, 14))
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -209,28 +193,28 @@ public class Ingresos extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(96, 96, 96)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel3))
-                .addGap(41, 41, 41)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(65, 65, 65)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tf_rut, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                    .addComponent(tf_fecha)
+                    .addComponent(tf_domicilio, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                     .addComponent(tf_nombre)
-                    .addComponent(tf_domicilio)
-                    .addComponent(tf_valor)
+                    .addComponent(tf_rut)
                     .addComponent(tf_factura)
-                    .addComponent(tf_fecha))
+                    .addComponent(tf_valor))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tf_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -254,7 +238,7 @@ public class Ingresos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(tf_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Tabla_cliente.setModel(new javax.swing.table.DefaultTableModel(
@@ -311,15 +295,16 @@ public class Ingresos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 827, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         jLabel12.setText("5k");
@@ -417,7 +402,7 @@ public class Ingresos extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(172, 172, 172)
+                .addGap(91, 91, 91)
                 .addComponent(tf_5k, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tf_11k, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,7 +410,7 @@ public class Ingresos extends javax.swing.JFrame {
                 .addComponent(tf_15k, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tf_45k, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(tf_15kal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tf_15kFe, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -491,15 +476,25 @@ public class Ingresos extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(178, 178, 178)
+                .addGap(89, 89, 89)
+                .addComponent(bt_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bt_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bt_guardarcambios, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bt_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(599, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                .addGap(94, 94, 94)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -507,24 +502,12 @@ public class Ingresos extends javax.swing.JFrame {
                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(bt_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(bt_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(bt_guardarcambios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(bt_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,7 +528,7 @@ public class Ingresos extends javax.swing.JFrame {
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_guardar)
                     .addComponent(bt_eliminar)
@@ -558,10 +541,10 @@ public class Ingresos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,10 +553,10 @@ public class Ingresos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -588,7 +571,7 @@ public class Ingresos extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_valorKeyTyped
 
     private void bt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_buscarActionPerformed
-        Buscar_info();
+        buscar_cliente();
     }//GEN-LAST:event_bt_buscarActionPerformed
 
     private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
@@ -598,7 +581,6 @@ public class Ingresos extends javax.swing.JFrame {
 
     private void bt_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarActionPerformed
         Enviar_informacion();
-        mostrarTabla();
     }//GEN-LAST:event_bt_guardarActionPerformed
 
     private void tf_11kcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_11kcKeyTyped
@@ -665,8 +647,8 @@ public class Ingresos extends javax.swing.JFrame {
     private void bt_guardarcambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarcambiosActionPerformed
         Object[] opciones = {"Guardar", "Revisar"};
         int eleccion = JOptionPane.showOptionDialog(rootPane, "¿Desea Enviar la  Información?", "Mensaje de Confirmacion",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
         if (eleccion == JOptionPane.YES_OPTION) {
             try {
                 ClienteJpaController clienteController = new ClienteJpaController(Entity.getEntityManagerFactory());
@@ -689,13 +671,117 @@ public class Ingresos extends javax.swing.JFrame {
                 cli.setKCat2(tf_15kc.getText());
                 cli.setKCat3(tf_45kc.getText());
                 clienteController.edit(cli);
-            
+                mostrarTabla();
                 limpiar();
+                System.out.println(cli.toString());
                 bt_guardarcambios.setEnabled(false);
                 bt_guardar.setEnabled(true);
                 bt_editar.setEnabled(true);
                 bt_eliminar.setEnabled(true);
+
+            } catch (Exception e) {
+                if (e.equals(e)) {
+                    JOptionPane.showMessageDialog(this, "Existen Campos vacios, por favor revisa tu información!");
+                }
+            }
+        }
+    }//GEN-LAST:event_bt_guardarcambiosActionPerformed
+    
+    public void mostrarTabla() {
+    /* hace referencia a mostrar los ingreso diario en la tabla */
+    try {
+        DefaultTableModel modelo;
+
+        modelo = (new DefaultTableModel(null, new String [] {"ID","Fecha","N°Factura","RUT","Nombre","Domicilio","Valor","5k","11k","15k","45k","15k Al","15k Fe","5k C","11k C","15k C","45k C"}){
+            Class[] types = new Class [] {java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class};
+            boolean[] canEdit = new boolean [] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false};
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return canEdit [colIndex];}
+        });
+        Tabla_cliente.setModel(modelo);
+        Tabla_cliente.getColumnModel().getColumn(0).setPreferredWidth(60);
+        Tabla_cliente.getColumnModel().getColumn(1).setPreferredWidth(80);
+        Tabla_cliente.getColumnModel().getColumn(2).setPreferredWidth(90);
+        Tabla_cliente.getColumnModel().getColumn(3).setPreferredWidth(100);
+        Tabla_cliente.getColumnModel().getColumn(4).setPreferredWidth(200);
+        Tabla_cliente.getColumnModel().getColumn(5).setPreferredWidth(200);
+        Tabla_cliente.getColumnModel().getColumn(6).setPreferredWidth(80);
+        Tabla_cliente.getColumnModel().getColumn(7).setPreferredWidth(50);
+        Tabla_cliente.getColumnModel().getColumn(8).setPreferredWidth(50);
+        Tabla_cliente.getColumnModel().getColumn(9).setPreferredWidth(50);
+        Tabla_cliente.getColumnModel().getColumn(10).setPreferredWidth(50);
+        Tabla_cliente.getColumnModel().getColumn(11).setPreferredWidth(50);
+        Tabla_cliente.getColumnModel().getColumn(12).setPreferredWidth(50);
+        Tabla_cliente.getColumnModel().getColumn(13).setPreferredWidth(50);
+        Tabla_cliente.getColumnModel().getColumn(14).setPreferredWidth(50);
+        Tabla_cliente.getColumnModel().getColumn(15).setPreferredWidth(50);
+        Tabla_cliente.getColumnModel().getColumn(16).setPreferredWidth(50);
+        Object[] obj = new Object[17];
+        ClienteJpaController jpa = new ClienteJpaController(Entity.getEntityManagerFactory());
+
+        List<Cliente> uni = jpa.findClienteEntities();
+        Cliente cli = new Cliente();
+
+        for (int i = 0; i < uni.size(); i++) {
+            cli = (Cliente) uni.get(i);       
+            obj[0]  = cli.getId();
+            obj[1] = cli.getFecha();
+            obj[2] = cli.getFactura();
+            obj[3] = cli.getRut();
+            obj[4] = cli.getNombre();
+            obj[5] = cli.getDomicilio();
+            obj[6] = cli.getValorFactura();
+            obj[7] = cli.getK();
+            obj[8] = cli.getK1();
+            obj[9] = cli.getK2();
+            obj[10] = cli.getK3();
+            obj[11] = cli.getKAl();
+            obj[12] = cli.getKFe();
+            obj[13] = cli.getKCat();
+            obj[14] = cli.getKCat1();
+            obj[15] = cli.getKCat2();
+            obj[16] = cli.getKCat3();
+            modelo.addRow(obj);
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+    }
+}
+
+    public void Enviar_informacion() {
+        Object[] opciones = {"Enviar", "Revisar"};
+        int eleccion = JOptionPane.showOptionDialog(rootPane, "¿Desea Enviar la  Información?", "Mensaje de Confirmacion",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
+        if (eleccion == JOptionPane.YES_OPTION) {
+            try {
+                ClienteJpaController clienteController = new ClienteJpaController(Entity.getEntityManagerFactory());
+                Cliente cli = new Cliente();
+                cli.setFecha(tf_fecha.getText());
+                cli.setFactura(tf_factura.getText());
+                cli.setRut(tf_rut.getText());
+                cli.setNombre(tf_nombre.getText());
+                cli.setDomicilio(tf_domicilio.getText());
+                cli.setValorFactura(Integer.parseInt(tf_valor.getText()));
+                cli.setK(tf_5k.getText());
+                cli.setK1(tf_11k.getText());
+                cli.setK2(tf_15k.getText());
+                cli.setK3(tf_45k.getText());
+                cli.setKAl(tf_15kal.getText());
+                cli.setKFe(tf_15kFe.getText());
+                cli.setKCat(tf_5kc.getText());
+                cli.setKCat1(tf_11kc.getText());
+                cli.setKCat2(tf_15kc.getText());
+                cli.setKCat3(tf_45kc.getText());
+                clienteController.create(cli);
                 mostrarTabla();
+                limpiar();
+                JOptionPane.showMessageDialog(this, "Registro Ingresado!");
             } catch (Exception e) {
                 if (e.equals(e)) {
                     JOptionPane.showMessageDialog(this, "Existen Campos vacios, por favor revisa tu información!");
@@ -704,8 +790,56 @@ public class Ingresos extends javax.swing.JFrame {
         } else {
 
         }
-    }//GEN-LAST:event_bt_guardarcambiosActionPerformed
-    
+    }
+
+    public void buscar_cliente() {
+        if (tf_buscar.getText().length() >= 8 & tf_buscar.getText().length() <= 10) {
+            try {
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("LipiAppPU");
+                EntityManager em = emf.createEntityManager();
+                Cliente cli = new Cliente();
+
+                TypedQuery<Cliente> consultaCliente = em.createNamedQuery("Cliente.findByRut", Cliente.class);
+                consultaCliente.setParameter("rut", tf_buscar.getText());
+                List<Cliente> lista = consultaCliente.getResultList();
+
+                cli = lista.get(0);
+
+                tf_rut.setText(cli.getRut());
+                tf_nombre.setText(cli.getNombre());
+                tf_domicilio.setText(cli.getDomicilio());
+
+            } catch (Exception e) {
+                if (e.equals(e)) {
+                    JOptionPane.showMessageDialog(this, "No existe Informacion! " + e.getMessage());
+                }
+            }
+        } else if (tf_buscar.getText().length() <= 0) {
+
+            JOptionPane.showMessageDialog(this, "Ingrese un rut a buscar");
+
+        } else if ((tf_buscar.getText().length() <= 6)) {
+            JOptionPane.showMessageDialog(this, "Ingrese entre 8 y 10 carácteres");
+        }
+    }
+
+    public void eliminar(){
+        try {
+            Integer id = (Integer) Tabla_cliente.getValueAt(Tabla_cliente.getSelectedRow(), 0);     
+            ClienteJpaController prd = new ClienteJpaController(Entity.getEntityManagerFactory());
+            int Confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+              if (Confirmacion == 0) {
+                    if (id != null) {
+                        prd.destroy(id);
+                        this.mostrarTabla();
+                        JOptionPane.showMessageDialog(null, "Se ha eliminado el Registro");
+                    } 
+                }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Seleccione un registro en el listado antes de eliminar");
+        }
+    }
+
     public void cargarCliente(Cliente c){
         lb_id.setText(c.getId().toString());
         tf_fecha.setText(c.getFecha());
@@ -724,6 +858,37 @@ public class Ingresos extends javax.swing.JFrame {
         tf_11kc.setText(c.getKCat1());
         tf_15kc.setText(c.getKCat2());
         tf_45kc.setText(c.getKCat3());
+    }
+    
+    public void limpiar() {
+        Date fecha = new Date();
+        SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
+        lb_id.setText("");
+        tf_fecha.setText(dt1.format(fecha));
+        tf_factura.setText("");
+        tf_rut.setText("");
+        tf_nombre.setText("");
+        tf_domicilio.setText("");
+        tf_valor.setText("");
+        tf_5k.setText("0");
+        tf_11k.setText("0");
+        tf_15k.setText("0");
+        tf_45k.setText("0");
+        tf_15kal.setText("0");
+        tf_15kFe.setText("0");
+        tf_5kc.setText("0");
+        tf_11kc.setText("0");
+        tf_15kc.setText("0");
+        tf_45kc.setText("0");
+    }
+    
+    public void soloNumeros(java.awt.event.KeyEvent evt) {
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Puedes Ingresar solo digitos");
+        }
     }
     
     /**
@@ -759,194 +924,6 @@ public class Ingresos extends javax.swing.JFrame {
                 new Ingresos().setVisible(true);
             }
         });
-    }
-
-    public void soloNumeros(java.awt.event.KeyEvent evt) {
-        char validar = evt.getKeyChar();
-
-        if (Character.isLetter(validar)) {
-            getToolkit().beep();
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Puedes Ingresar solo digitos");
-        }
-    }
-
-    public void limpiar() {
-        tf_factura.setText("");
-        tf_factura.setText("");
-        tf_nombre.setText("");
-        tf_rut.setText("");
-        tf_domicilio.setText("");
-        tf_valor.setText("");
-        tf_5k.setText("0");
-        tf_11k.setText("0");
-        tf_15k.setText("0");
-        tf_45k.setText("0");
-        tf_15kal.setText("0");
-        tf_15kFe.setText("0");
-        tf_5kc.setText("0");
-        tf_11kc.setText("0");
-        tf_15kc.setText("0");
-        tf_45kc.setText("0");
-
-    }
-    
-    public void mostrarTabla() {
-        /* hace referencia a mostrar los ingreso diario en la tabla */
-        try {
-            /*String[] columnas = {"ID","fecha", "N°factura", "Rut", "Nombre", "Domicilio", "Valor Factura", "5k", "11k",
-                "15k", "45k", "15k Al", "15k Fe", "5k C", "11k C", "15k C", "45k C"};
-            
-            DefaultTableModel tabla = new DefaultTableModel(null, columnas);
-            */
-            DefaultTableModel modelo;
-
-            modelo = (new DefaultTableModel(null, new String [] {"ID","Fecha","N°Factura","RUT","Nombre","Domicilio","Valor","5k","11k","15k","45k","15k Al","15kFe","5k Cat","11k Cat","15k Cat","45k Cat"}){
-                Class[] types = new Class [] {java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class};
-                boolean[] canEdit = new boolean [] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false};
-                @Override
-                public Class getColumnClass(int columnIndex) {
-                    return types [columnIndex];
-                }
-                @Override
-                public boolean isCellEditable(int rowIndex, int colIndex){
-                    return canEdit [colIndex];}
-            });
-            Tabla_cliente.setModel(modelo);
-            Tabla_cliente.getColumnModel().getColumn(0).setPreferredWidth(30);
-            Tabla_cliente.getColumnModel().getColumn(1).setPreferredWidth(80);
-            Tabla_cliente.getColumnModel().getColumn(2).setPreferredWidth(80);
-            Tabla_cliente.getColumnModel().getColumn(3).setPreferredWidth(80);
-            Tabla_cliente.getColumnModel().getColumn(4).setPreferredWidth(150);
-            Tabla_cliente.getColumnModel().getColumn(5).setPreferredWidth(180);
-            Tabla_cliente.getColumnModel().getColumn(6).setPreferredWidth(60);
-            Tabla_cliente.getColumnModel().getColumn(7).setPreferredWidth(40);
-            Tabla_cliente.getColumnModel().getColumn(8).setPreferredWidth(40);
-            Tabla_cliente.getColumnModel().getColumn(9).setPreferredWidth(40);
-            Tabla_cliente.getColumnModel().getColumn(10).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(11).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(12).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(13).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(14).setPreferredWidth(60);
-            Tabla_cliente.getColumnModel().getColumn(15).setPreferredWidth(60);
-            Tabla_cliente.getColumnModel().getColumn(16).setPreferredWidth(60);
-            
-            Object[] obj = new Object[17];
-            List<Cliente> uni = query1.getResultList();
-            Cliente cli = new Cliente();
-            
-            for (int i = 0; i < uni.size(); i++) {
-                cli = (Cliente) uni.get(i);       
-                obj[0]  = cli.getId();
-                obj[1] = cli.getFecha();
-                obj[2] = cli.getFactura();
-                obj[3] = cli.getRut();
-                obj[4] = cli.getNombre();
-                obj[5] = cli.getDomicilio();
-                obj[6] = cli.getValorFactura();
-                obj[7] = cli.getK();
-                obj[8] = cli.getK1();
-                obj[9] = cli.getK2();
-                obj[10] = cli.getK3();
-                obj[11] = cli.getKAl();
-                obj[12] = cli.getKFe();
-                obj[13] = cli.getKCat();
-                obj[14] = cli.getKCat1();
-                obj[15] = cli.getKCat2();
-                obj[16] = cli.getKCat3();
-                modelo.addRow(obj);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
-
-    public void Enviar_informacion() {
-        Object[] opciones = {"Enviar", "Revisar"};
-        int eleccion = JOptionPane.showOptionDialog(rootPane, "¿Desea Enviar la  Información?", "Mensaje de Confirmacion",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
-        if (eleccion == JOptionPane.YES_OPTION) {
-            try {
-                ClienteJpaController clienteController = new ClienteJpaController(Entity.getEntityManagerFactory());
-                Cliente cli = new Cliente();
-                cli.setFecha(tf_fecha.getText());
-                cli.setFactura(tf_factura.getText());
-                cli.setRut(tf_rut.getText());
-                cli.setNombre(tf_nombre.getText());
-                cli.setDomicilio(tf_domicilio.getText());
-                cli.setValorFactura(Integer.parseInt(tf_valor.getText()));
-                cli.setK(tf_5k.getText());
-                cli.setK1(tf_11k.getText());
-                cli.setK2(tf_15k.getText());
-                cli.setK3(tf_45k.getText());
-                cli.setKAl(tf_15kal.getText());
-                cli.setKFe(tf_15kFe.getText());
-                cli.setKCat(tf_5kc.getText());
-                cli.setKCat1(tf_11kc.getText());
-                cli.setKCat2(tf_15kc.getText());
-                cli.setKCat3(tf_45kc.getText());
-
-                clienteController.create(cli);
-                limpiar();
-                JOptionPane.showMessageDialog(this, "Registro Ingresado!");
-            } catch (Exception e) {
-                if (e.equals(e)) {
-                    JOptionPane.showMessageDialog(this, "Existen Campos vacios, por favor revisa tu información!");
-                }
-            }
-        } else {
-
-        }
-    }
-
-    public void Buscar_info() {
-        if (tf_buscar.getText().length() >= 8 & tf_buscar.getText().length() <= 10) {
-            try {
-                EntityManagerFactory emf = Persistence.createEntityManagerFactory("LipiAppPU");
-                EntityManager em = emf.createEntityManager();
-                Cliente cli = new Cliente();
-
-                TypedQuery<Cliente> consultaCliente = em.createNamedQuery("Cliente.findByRut", Cliente.class);
-                consultaCliente.setParameter("rut", tf_buscar.getText());
-                List<Cliente> lista = consultaCliente.getResultList();
-
-                cli = lista.get(0);
-
-                tf_rut.setText(cli.getRut());
-                tf_nombre.setText(cli.getNombre());
-                tf_domicilio.setText(cli.getDomicilio());
-
-            } catch (Exception e) {
-                if (e.equals(e)) {
-                    JOptionPane.showMessageDialog(this, "No existe Informacion! " + e.getMessage());
-                }
-            }
-        } else if (tf_buscar.getText().length() <= 0) {
-
-            JOptionPane.showMessageDialog(this, "Ingrese un rut a buscar");
-
-        } else if ((tf_buscar.getText().length() <= 6)) {
-            JOptionPane.showMessageDialog(this, "Ingrese entre 8 y 10 carácteres");
-        }
-    }
-
-    public void eliminar(){
-        try {
-        Integer id = (Integer) Tabla_cliente.getValueAt(Tabla_cliente.getSelectedRow(), 0);     
-        ClienteJpaController prd = new ClienteJpaController(Entity.getEntityManagerFactory());
-            int Confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-              if (Confirmacion == 0) {
-                    if (id != null) {
-                        prd.destroy(id);
-                        this.mostrarTabla();
-                        JOptionPane.showMessageDialog(null, "Se ha eliminado el Registro");
-
-                    } 
-                }
-      } catch (Exception e) {
-              JOptionPane.showMessageDialog(this, "Seleccione un registro en el listado antes de eliminar");
-            }
     }
 
 
