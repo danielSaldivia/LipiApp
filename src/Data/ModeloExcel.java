@@ -58,7 +58,6 @@ public class ModeloExcel {
                                     listaColumna[indiceColumna]=celda.getDateCellValue();
                                     break;
                             }
-                            System.out.println("col"+indiceColumna+" valor: true - "+celda+".");
                         }                        
                     }
                 }
@@ -66,7 +65,6 @@ public class ModeloExcel {
             }
             respuesta="Importación exitosa";
         } catch (IOException | InvalidFormatException | EncryptedDocumentException e) {
-            System.err.println(e.getMessage());
         }
         return respuesta;
     }
@@ -96,7 +94,6 @@ public class ModeloExcel {
             }
             respuesta="Exportación exitosa.";
         } catch (Exception e) {
-            System.err.println(e.getMessage());
         }
         return respuesta;
     }

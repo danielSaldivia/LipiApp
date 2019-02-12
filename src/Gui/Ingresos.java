@@ -20,6 +20,7 @@ import javax.persistence.TypedQuery;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -33,6 +34,7 @@ public class Ingresos extends javax.swing.JFrame {
     JFileChooser selecArchivo = new JFileChooser();
     File archivo;
     int contAccion = 0;
+    DefaultTableModel modelo1;
 
     public Ingresos() {
         initComponents();
@@ -107,7 +109,6 @@ public class Ingresos extends javax.swing.JFrame {
         bt_eliminar = new javax.swing.JButton();
         bt_editar = new javax.swing.JButton();
         bt_guardarcambios = new javax.swing.JButton();
-        btnImportar = new javax.swing.JButton();
         btnExportar = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
@@ -483,14 +484,7 @@ public class Ingresos extends javax.swing.JFrame {
             }
         });
 
-        btnImportar.setText("Importar Excel");
-        btnImportar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImportarActionPerformed(evt);
-            }
-        });
-
-        btnExportar.setText("Exportar Excel");
+        btnExportar.setText("Exportar A  Excel");
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExportarActionPerformed(evt);
@@ -511,8 +505,6 @@ public class Ingresos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
@@ -564,7 +556,6 @@ public class Ingresos extends javax.swing.JFrame {
                     .addComponent(bt_eliminar)
                     .addComponent(bt_editar)
                     .addComponent(bt_guardarcambios)
-                    .addComponent(btnImportar)
                     .addComponent(btnExportar))
                 .addGap(313, 313, 313))
         );
@@ -611,11 +602,11 @@ public class Ingresos extends javax.swing.JFrame {
 
     private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
         eliminar();
-        mostrarTabla();
     }//GEN-LAST:event_bt_eliminarActionPerformed
 
     private void bt_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarActionPerformed
         Enviar_informacion();
+      /*  GuardarTabla();*/
     }//GEN-LAST:event_bt_guardarActionPerformed
 
     private void tf_11kcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_11kcKeyTyped
@@ -706,7 +697,6 @@ public class Ingresos extends javax.swing.JFrame {
                 cli.setKCat2(tf_15kc.getText());
                 cli.setKCat3(tf_45kc.getText());
                 clienteController.edit(cli);
-                mostrarTabla();
                 limpiar();
                 bt_guardarcambios.setEnabled(false);
                 bt_guardar.setEnabled(true);
@@ -721,28 +711,6 @@ public class Ingresos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_guardarcambiosActionPerformed
 
-    private void btnImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarActionPerformed
-        ModeloExcel modeloE = new ModeloExcel();
-        Ingresos vistaE = new Ingresos();
-
-        contAccion++;
-        if (contAccion == 1) {
-            AgregarFiltro();
-        }
-        if (selecArchivo.showDialog(null, "Seleccionar archivo") == JFileChooser.APPROVE_OPTION) {
-            archivo = selecArchivo.getSelectedFile();
-            if (archivo.getName().endsWith("xls") || archivo.getName().endsWith("xlsx")) {
-                JOptionPane.showMessageDialog(null,
-                        modeloE.Importar(archivo, vistaE.Tabla_cliente) + "\n Formato ." + archivo.getName().substring(archivo.getName().lastIndexOf(".") + 1),
-                        "IMPORTAR EXCEL", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Elija un formato valido.");
-            }
-        }
-
-
-    }//GEN-LAST:event_btnImportarActionPerformed
-
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
         ModeloExcel modeloE = new ModeloExcel();
         Ingresos vistaE = new Ingresos();
@@ -753,7 +721,9 @@ public class Ingresos extends javax.swing.JFrame {
         if (selecArchivo.showDialog(null, "Exportar") == JFileChooser.APPROVE_OPTION) {
             archivo = selecArchivo.getSelectedFile();
             if (archivo.getName().endsWith("xls") || archivo.getName().endsWith("xlsx")) {
-                JOptionPane.showMessageDialog(null, modeloE.Exportar(archivo, vistaE.Tabla_cliente) + "\n Formato ." + archivo.getName().substring(archivo.getName().lastIndexOf(".") + 1));
+                JOptionPane.showMessageDialog(null, modeloE.Exportar(archivo, vistaE.Tabla_cliente) + "\n Formato ."
+                        + archivo.getName().substring(archivo.getName().lastIndexOf(".") + 1));
+
             } else {
                 JOptionPane.showMessageDialog(null, "Elija un formato valido.");
             }
@@ -855,7 +825,6 @@ public class Ingresos extends javax.swing.JFrame {
                 cli.setKCat2(tf_15kc.getText());
                 cli.setKCat3(tf_45kc.getText());
                 clienteController.create(cli);
-                mostrarTabla();
                 limpiar();
                 JOptionPane.showMessageDialog(this, "Registro Ingresado!");
             } catch (Exception e) {
@@ -973,6 +942,25 @@ public class Ingresos extends javax.swing.JFrame {
         selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xlsx)", "xlsx"));
     }
 
+    public void GuardarTabla() {
+
+        try {
+
+            ClienteJpaController jpa = new ClienteJpaController(Entity.getEntityManagerFactory());
+            Cliente cli = new Cliente();
+            String[] Datos = new String[17];
+            Datos[0] = tf_factura.getText();
+            Datos[1] = tf_fecha.getText();
+            modelo1.addRow(Datos);
+
+        } catch (Exception e) {
+            if (e.equals(e)) {
+                JOptionPane.showMessageDialog(this, "Existen Campos vacios, por favor revisa tu información!");
+            }
+        }
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -1019,7 +1007,6 @@ public class Ingresos extends javax.swing.JFrame {
     private javax.swing.JButton bt_guardar;
     private javax.swing.JButton bt_guardarcambios;
     public javax.swing.JButton btnExportar;
-    public javax.swing.JButton btnImportar;
     private javax.persistence.EntityManager em;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
