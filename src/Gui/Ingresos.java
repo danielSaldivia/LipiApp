@@ -7,7 +7,9 @@ package Gui;
 
 import controlladores.ClienteJpaController;
 import Data.Cliente;
+import Data.ModeloExcel;
 import java.awt.Image;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +18,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -26,9 +30,10 @@ import javax.swing.table.TableColumn;
  */
 public class Ingresos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Ingresos
-     */
+    JFileChooser selecArchivo = new JFileChooser();
+    File archivo;
+    int contAccion = 0;
+
     public Ingresos() {
         initComponents();
 
@@ -38,7 +43,6 @@ public class Ingresos extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         limpiar();
-        mostrarTabla();
     }
 
     /**
@@ -103,6 +107,8 @@ public class Ingresos extends javax.swing.JFrame {
         bt_eliminar = new javax.swing.JButton();
         bt_editar = new javax.swing.JButton();
         bt_guardarcambios = new javax.swing.JButton();
+        btnImportar = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -303,7 +309,7 @@ public class Ingresos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -477,6 +483,20 @@ public class Ingresos extends javax.swing.JFrame {
             }
         });
 
+        btnImportar.setText("Importar Excel");
+        btnImportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportarActionPerformed(evt);
+            }
+        });
+
+        btnExportar.setText("Exportar Excel");
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -490,7 +510,11 @@ public class Ingresos extends javax.swing.JFrame {
                 .addComponent(bt_guardarcambios, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(599, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                 .addGap(94, 94, 94)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -539,7 +563,9 @@ public class Ingresos extends javax.swing.JFrame {
                     .addComponent(bt_guardar)
                     .addComponent(bt_eliminar)
                     .addComponent(bt_editar)
-                    .addComponent(bt_guardarcambios))
+                    .addComponent(bt_guardarcambios)
+                    .addComponent(btnImportar)
+                    .addComponent(btnExportar))
                 .addGap(313, 313, 313))
         );
 
@@ -549,8 +575,11 @@ public class Ingresos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,9 +587,9 @@ public class Ingresos extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -691,6 +720,45 @@ public class Ingresos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_bt_guardarcambiosActionPerformed
+
+    private void btnImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarActionPerformed
+        ModeloExcel modeloE = new ModeloExcel();
+        Ingresos vistaE = new Ingresos();
+
+        contAccion++;
+        if (contAccion == 1) {
+            AgregarFiltro();
+        }
+        if (selecArchivo.showDialog(null, "Seleccionar archivo") == JFileChooser.APPROVE_OPTION) {
+            archivo = selecArchivo.getSelectedFile();
+            if (archivo.getName().endsWith("xls") || archivo.getName().endsWith("xlsx")) {
+                JOptionPane.showMessageDialog(null,
+                        modeloE.Importar(archivo, vistaE.Tabla_cliente) + "\n Formato ." + archivo.getName().substring(archivo.getName().lastIndexOf(".") + 1),
+                        "IMPORTAR EXCEL", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Elija un formato valido.");
+            }
+        }
+
+
+    }//GEN-LAST:event_btnImportarActionPerformed
+
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+        ModeloExcel modeloE = new ModeloExcel();
+        Ingresos vistaE = new Ingresos();
+        contAccion++;
+        if (contAccion == 1) {
+            AgregarFiltro();
+        }
+        if (selecArchivo.showDialog(null, "Exportar") == JFileChooser.APPROVE_OPTION) {
+            archivo = selecArchivo.getSelectedFile();
+            if (archivo.getName().endsWith("xls") || archivo.getName().endsWith("xlsx")) {
+                JOptionPane.showMessageDialog(null, modeloE.Exportar(archivo, vistaE.Tabla_cliente) + "\n Formato ." + archivo.getName().substring(archivo.getName().lastIndexOf(".") + 1));
+            } else {
+                JOptionPane.showMessageDialog(null, "Elija un formato valido.");
+            }
+        }
+    }//GEN-LAST:event_btnExportarActionPerformed
 
     public void mostrarTabla() {
         /* hace referencia a mostrar los ingreso diario en la tabla */
@@ -900,6 +968,11 @@ public class Ingresos extends javax.swing.JFrame {
         }
     }
 
+    public void AgregarFiltro() {
+        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xls)", "xls"));
+        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xlsx)", "xlsx"));
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -939,12 +1012,14 @@ public class Ingresos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.Query Consulta;
     private javax.persistence.EntityManager Entity;
-    private javax.swing.JTable Tabla_cliente;
+    public javax.swing.JTable Tabla_cliente;
     private javax.swing.JButton bt_buscar;
     private javax.swing.JButton bt_editar;
     private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_guardar;
     private javax.swing.JButton bt_guardarcambios;
+    public javax.swing.JButton btnExportar;
+    public javax.swing.JButton btnImportar;
     private javax.persistence.EntityManager em;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -964,13 +1039,13 @@ public class Ingresos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    public javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JPanel jPanel4;
+    public javax.swing.JPanel jPanel5;
+    public javax.swing.JPanel jPanel6;
+    public javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lb_id;
     private javax.persistence.Query query1;
     private javax.swing.JTextField tf_11k;
