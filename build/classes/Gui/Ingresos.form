@@ -478,8 +478,6 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="bt_editar" min="-2" pref="140" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnImportar" min="-2" pref="140" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnExportar" min="-2" pref="141" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -537,7 +535,6 @@
                       <Component id="bt_eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bt_editar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bt_guardarcambios" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnImportar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnExportar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="313" max="-2" attributes="0"/>
@@ -766,20 +763,9 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_guardarcambiosActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnImportar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Importar Excel"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImportarActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JButton" name="btnExportar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Exportar Excel"/>
+            <Property name="text" type="java.lang.String" value="Exportar A  Excel"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportarActionPerformed"/>
