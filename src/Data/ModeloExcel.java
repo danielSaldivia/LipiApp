@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Data;
+import Gui.Ingresos;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -20,12 +21,8 @@ import org.apache.poi.xssf.usermodel.*;
  */
 public class ModeloExcel {
     Workbook wb;
-    
-    public String Importar(File archivo, JTable tablaD){
+    public String Importar(File archivo, JTable tablaD, DefaultTableModel modeloT){
         String respuesta="No se pudo realizar la importación.";
-        DefaultTableModel modeloT = new DefaultTableModel();
-        tablaD.setModel(modeloT);
-        tablaD.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         try {
             wb = WorkbookFactory.create(new FileInputStream(archivo));
             Sheet hoja = wb.getSheetAt(0);
@@ -41,7 +38,7 @@ public class ModeloExcel {
                     indiceColumna++;
                     Cell celda = (Cell) columnaIterator.next();
                     if(indiceFila==0){
-                        modeloT.addColumn(celda.getStringCellValue());
+                        //modeloT.addColumn(celda.getStringCellValue());
                     }else{
                         if(celda!=null){
                             switch(celda.getCellType()){
@@ -77,25 +74,26 @@ public class ModeloExcel {
         }else{
             wb = new XSSFWorkbook();
         }
-        
         Sheet hoja = wb.createSheet("Hoja 1");
-        
-        hoja.setColumnWidth(0, 3000);
-        hoja.setColumnWidth(1, 3000);
-        hoja.setColumnWidth(2, 4000);
-        hoja.setColumnWidth(3, 8000);
-        hoja.setColumnWidth(4, 8000);
-        hoja.setColumnWidth(5, 3000);
-        
-        hoja.setDefaultRowHeight((short)300);
+        hoja.setColumnWidth(0, 2000);
+        hoja.setColumnWidth(1, 2800);
+        hoja.setColumnWidth(2, 3000);
+        hoja.setColumnWidth(3, 3500);
+        hoja.setColumnWidth(4, 6000);
+        hoja.setColumnWidth(5, 7000);
+        hoja.setColumnWidth(6, 2800);
+        for (int j = 7; j < 16; j++) {
+            hoja.setColumnWidth(j, 2000);
+        }
+        hoja.setDefaultRowHeight((short)280);
         
         CellStyle style = wb.createCellStyle();
-        
+        style.setLocked(false);
         try {
             for (int i = -1; i < numFila; i++) {
                 Row fila = hoja.createRow(i+1);
-                for (int j = 1; j < numColumna; j++) {
-                    Cell celda = fila.createCell(j-1);
+                for (int j = 0; j < numColumna; j++) {
+                    Cell celda = fila.createCell(j);
                     if(i==-1){
                         celda.setCellValue(String.valueOf(tablaD.getColumnName(j)));
                         Font font = wb.createFont ();
@@ -110,7 +108,6 @@ public class ModeloExcel {
                             celda.setCellValue(String.valueOf(tablaD.getValueAt(i, j)));
                         } else {
                             celda.setCellValue(Double.parseDouble(tablaD.getValueAt(i, j).toString()));
-                     
                         }
                     }
                     wb.write(new FileOutputStream(archivo));
@@ -118,7 +115,7 @@ public class ModeloExcel {
             }
             respuesta="Exportación exitosa.";
         } catch (Exception e) {
-            
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return respuesta;
     }
