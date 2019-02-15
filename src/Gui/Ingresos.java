@@ -11,6 +11,7 @@ import Data.ModeloExcel;
 import java.awt.Image;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,21 +21,23 @@ import javax.persistence.TypedQuery;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
  * @author Theking
  */
 public class Ingresos extends javax.swing.JFrame {
-
-    JFileChooser selecArchivo = new JFileChooser();
+    Date fecha = new Date();
+    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+    String date = format.format(fecha);
+    
     File archivo;
+    JFileChooser selecArchivo = new JFileChooser();
+    
     int contAccion = 0;
-    DefaultTableModel modelo1;
+    DefaultTableModel modelo;
 
     public Ingresos() {
         initComponents();
@@ -43,8 +46,11 @@ public class Ingresos extends javax.swing.JFrame {
         setIconImage(icon);
 
         this.setExtendedState(MAXIMIZED_BOTH);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        limpiar();
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        
+        tf_fecha.setText(date);
+        //limpiar();
+        modelarTabla();
     }
 
     /**
@@ -58,8 +64,6 @@ public class Ingresos extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         Entity = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("LipiAppPU").createEntityManager();
-        Consulta = java.beans.Beans.isDesignTime() ? null : Entity.createQuery("SELECT c FROM Cliente c");
-        query1 = java.beans.Beans.isDesignTime() ? null : Entity.createQuery("SELECT c FROM Cliente c");
         em = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("LipiAppPU").createEntityManager();
         jPanel5 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -82,7 +86,7 @@ public class Ingresos extends javax.swing.JFrame {
         tf_fecha = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Tabla_cliente = new javax.swing.JTable();
+        tabla_cliente = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -116,10 +120,16 @@ public class Ingresos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LipiApp");
         setName("Ingreso de clientes"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabel10.setText("Buscar Cliente");
 
+        tf_buscar.setText("199339982");
         tf_buscar.setToolTipText("Ingrese RUT sin puntos ni guion");
         tf_buscar.setMaximumSize(new java.awt.Dimension(9, 9));
 
@@ -138,9 +148,9 @@ public class Ingresos extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(lb_id, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(lb_id, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,19 +165,19 @@ public class Ingresos extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(93, 93, 93)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
                 .addComponent(tf_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(bt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(bt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(tf_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,12 +199,14 @@ public class Ingresos extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Valor de Factura");
 
+        tf_factura.setText("2");
         tf_factura.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_facturaKeyTyped(evt);
             }
         });
 
+        tf_valor.setText("68000");
         tf_valor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_valorKeyTyped(evt);
@@ -251,15 +263,12 @@ public class Ingresos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(tf_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        Tabla_cliente.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_cliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Fecha", "N° Factura", "RUT", "Nombre", "Domicilio", "Valor Factura", "5k", "11k", "15k", "45k", "15k Al", "15k FE", "5K C", "11k C", "15k C", "45kC"
@@ -280,27 +289,27 @@ public class Ingresos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        Tabla_cliente.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        Tabla_cliente.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(Tabla_cliente);
-        if (Tabla_cliente.getColumnModel().getColumnCount() > 0) {
-            Tabla_cliente.getColumnModel().getColumn(0).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(1).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(2).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(3).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(4).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(5).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(6).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(7).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(8).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(9).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(10).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(11).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(12).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(13).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(14).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(15).setResizable(false);
-            Tabla_cliente.getColumnModel().getColumn(16).setResizable(false);
+        tabla_cliente.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tabla_cliente.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tabla_cliente);
+        if (tabla_cliente.getColumnModel().getColumnCount() > 0) {
+            tabla_cliente.getColumnModel().getColumn(0).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(1).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(2).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(3).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(4).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(5).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(6).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(7).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(8).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(9).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(10).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(11).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(12).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(13).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(14).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(15).setResizable(false);
+            tabla_cliente.getColumnModel().getColumn(16).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -309,15 +318,15 @@ public class Ingresos extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLabel12.setText("5k");
@@ -350,60 +359,71 @@ public class Ingresos extends javax.swing.JFrame {
         jLabel21.setText("45k C");
         jLabel21.setPreferredSize(new java.awt.Dimension(40, 14));
 
+        tf_5k.setText("1");
         tf_5k.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_5kKeyTyped(evt);
             }
         });
 
+        tf_11k.setText("1");
         tf_11k.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_11kKeyTyped(evt);
             }
         });
 
+        tf_15k.setText("2");
+        tf_15k.setToolTipText("");
         tf_15k.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_15kKeyTyped(evt);
             }
         });
 
+        tf_45k.setText("0");
         tf_45k.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_45kKeyTyped(evt);
             }
         });
 
+        tf_15kal.setText("0");
         tf_15kal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_15kalKeyTyped(evt);
             }
         });
 
+        tf_15kFe.setText("0");
         tf_15kFe.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_15kFeKeyTyped(evt);
             }
         });
 
+        tf_5kc.setText("0");
         tf_5kc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_5kcKeyTyped(evt);
             }
         });
 
+        tf_15kc.setText("0");
         tf_15kc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_15kcKeyTyped(evt);
             }
         });
 
+        tf_45kc.setText("0");
         tf_45kc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_45kcKeyTyped(evt);
             }
         });
 
+        tf_11kc.setText("0");
         tf_11kc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_11kcKeyTyped(evt);
@@ -432,10 +452,10 @@ public class Ingresos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(tf_11kc, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_15kc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_15kc, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tf_45kc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(753, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,15 +516,15 @@ public class Ingresos extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(bt_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
+                .addComponent(bt_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(bt_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(bt_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_guardarcambios, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bt_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(464, 464, 464)
                 .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
@@ -525,8 +545,8 @@ public class Ingresos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -550,7 +570,7 @@ public class Ingresos extends javax.swing.JFrame {
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_guardar)
                     .addComponent(bt_eliminar)
@@ -567,10 +587,7 @@ public class Ingresos extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -578,11 +595,10 @@ public class Ingresos extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -597,16 +613,16 @@ public class Ingresos extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_valorKeyTyped
 
     private void bt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_buscarActionPerformed
-        buscar_cliente();
+        buscarCliente();
     }//GEN-LAST:event_bt_buscarActionPerformed
 
     private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
-        eliminar();
+        eliminarRegistro();
     }//GEN-LAST:event_bt_eliminarActionPerformed
 
     private void bt_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarActionPerformed
-        Enviar_informacion();
-      /*  GuardarTabla();*/
+        guardarRegistro();
+      /*GuardarTabla();*/
     }//GEN-LAST:event_bt_guardarActionPerformed
 
     private void tf_11kcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_11kcKeyTyped
@@ -652,21 +668,22 @@ public class Ingresos extends javax.swing.JFrame {
     private void bt_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_editarActionPerformed
         try {
             ClienteJpaController jpa = new ClienteJpaController(em.getEntityManagerFactory());
-            int select = Tabla_cliente.getSelectedRow();
-            if (select != -1) {
+            int select = tabla_cliente.getSelectedRow();
+            String comp = tabla_cliente.getValueAt(tabla_cliente.getSelectedRow(), 0).toString();
+            if (select != -1 & comp != null) {
                 bt_guardarcambios.setEnabled(true);
                 bt_guardar.setEnabled(false);
                 bt_editar.setEnabled(false);
                 bt_eliminar.setEnabled(false);
-                int id = Integer.parseInt(Tabla_cliente.getValueAt(Tabla_cliente.getSelectedRow(), 0).toString());
+                int id = Integer.parseInt(tabla_cliente.getValueAt(tabla_cliente.getSelectedRow(), 0).toString());
                 Cliente c = new Cliente();
                 c = jpa.findCliente(id);
-                cargarCliente(c);
+                cargarRegistro(c);
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccione un registro de la lista");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Seleccione un registro de la lista" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Seleccione un registro de la lista");
         }
     }//GEN-LAST:event_bt_editarActionPerformed
 
@@ -712,132 +729,75 @@ public class Ingresos extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_guardarcambiosActionPerformed
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
-        ModeloExcel modeloE = new ModeloExcel();
-        Ingresos vistaE = new Ingresos();
-        contAccion++;
-        if (contAccion == 1) {
-            AgregarFiltro();
-        }
-        if (selecArchivo.showDialog(null, "Exportar") == JFileChooser.APPROVE_OPTION) {
-            archivo = selecArchivo.getSelectedFile();
-            if (archivo.getName().endsWith("xls") || archivo.getName().endsWith("xlsx")) {
-                JOptionPane.showMessageDialog(null, modeloE.Exportar(archivo, vistaE.Tabla_cliente) + "\n Formato ."
-                        + archivo.getName().substring(archivo.getName().lastIndexOf(".") + 1));
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Elija un formato valido.");
+        int rows = tabla_cliente.getRowCount();
+        if (rows > 0) {
+            ModeloExcel modeloE = new ModeloExcel();
+            boolean salir = false;
+            contAccion++;
+            if (contAccion == 1) {
+                AgregarFiltro();
             }
-        }
-    }//GEN-LAST:event_btnExportarActionPerformed
-
-    public void mostrarTabla() {
-        /* hace referencia a mostrar los ingreso diario en la tabla */
-        try {
-            DefaultTableModel modelo;
-
-            modelo = (new DefaultTableModel(null, new String[]{"ID", "Fecha", "N°Factura", "RUT", "Nombre", "Domicilio", "Valor", "5k", "11k", "15k", "45k", "15k Al", "15k Fe", "5k C", "11k C", "15k C", "45k C"}) {
-                Class[] types = new Class[]{java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class};
-                boolean[] canEdit = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
-
-                @Override
-                public Class getColumnClass(int columnIndex) {
-                    return types[columnIndex];
-                }
-
-                @Override
-                public boolean isCellEditable(int rowIndex, int colIndex) {
-                    return canEdit[colIndex];
-                }
-            });
-            Tabla_cliente.setModel(modelo);
-            Tabla_cliente.getColumnModel().getColumn(0).setPreferredWidth(60);
-            Tabla_cliente.getColumnModel().getColumn(1).setPreferredWidth(80);
-            Tabla_cliente.getColumnModel().getColumn(2).setPreferredWidth(90);
-            Tabla_cliente.getColumnModel().getColumn(3).setPreferredWidth(100);
-            Tabla_cliente.getColumnModel().getColumn(4).setPreferredWidth(200);
-            Tabla_cliente.getColumnModel().getColumn(5).setPreferredWidth(200);
-            Tabla_cliente.getColumnModel().getColumn(6).setPreferredWidth(80);
-            Tabla_cliente.getColumnModel().getColumn(7).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(8).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(9).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(10).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(11).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(12).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(13).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(14).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(15).setPreferredWidth(50);
-            Tabla_cliente.getColumnModel().getColumn(16).setPreferredWidth(50);
-            Object[] obj = new Object[17];
-            ClienteJpaController jpa = new ClienteJpaController(Entity.getEntityManagerFactory());
-
-            List<Cliente> uni = jpa.findClienteEntities();
-            Cliente cli = new Cliente();
-
-            for (int i = 0; i < uni.size(); i++) {
-                cli = (Cliente) uni.get(i);
-                obj[0] = cli.getId();
-                obj[1] = cli.getFecha();
-                obj[2] = cli.getFactura();
-                obj[3] = cli.getRut();
-                obj[4] = cli.getNombre();
-                obj[5] = cli.getDomicilio();
-                obj[6] = cli.getValorFactura();
-                obj[7] = cli.getK();
-                obj[8] = cli.getK1();
-                obj[9] = cli.getK2();
-                obj[10] = cli.getK3();
-                obj[11] = cli.getKAl();
-                obj[12] = cli.getKFe();
-                obj[13] = cli.getKCat();
-                obj[14] = cli.getKCat1();
-                obj[15] = cli.getKCat2();
-                obj[16] = cli.getKCat3();
-                modelo.addRow(obj);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
-
-    public void Enviar_informacion() {
-        Object[] opciones = {"Enviar", "Revisar"};
-        int eleccion = JOptionPane.showOptionDialog(rootPane, "¿Desea Enviar la  Información?", "Mensaje de Confirmacion",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
-        if (eleccion == JOptionPane.YES_OPTION) {
-            try {
-                ClienteJpaController clienteController = new ClienteJpaController(Entity.getEntityManagerFactory());
-                Cliente cli = new Cliente();
-                cli.setFecha(tf_fecha.getText());
-                cli.setFactura(tf_factura.getText());
-                cli.setRut(tf_rut.getText());
-                cli.setNombre(tf_nombre.getText());
-                cli.setDomicilio(tf_domicilio.getText());
-                cli.setValorFactura(Integer.parseInt(tf_valor.getText()));
-                cli.setK(tf_5k.getText());
-                cli.setK1(tf_11k.getText());
-                cli.setK2(tf_15k.getText());
-                cli.setK3(tf_45k.getText());
-                cli.setKAl(tf_15kal.getText());
-                cli.setKFe(tf_15kFe.getText());
-                cli.setKCat(tf_5kc.getText());
-                cli.setKCat1(tf_11kc.getText());
-                cli.setKCat2(tf_15kc.getText());
-                cli.setKCat3(tf_45kc.getText());
-                clienteController.create(cli);
-                limpiar();
-                JOptionPane.showMessageDialog(this, "Registro Ingresado!");
-            } catch (Exception e) {
-                if (e.equals(e)) {
-                    JOptionPane.showMessageDialog(this, "Existen Campos vacios, por favor revisa tu información!");
+            selecArchivo.setSelectedFile(new File(nombreExcel()));
+            archivo =  new File(selecArchivo.getCurrentDirectory()+"\\"+nombreExcel());
+            //Aqui se ejecuta la ventana...
+            while (salir == false){
+                if (selecArchivo.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    if (archivo.getName().endsWith("xls") || archivo.getName().endsWith("xlsx")) {
+                        //Esta linea llama al método que crea el archivo
+                        if (!archivo.exists() & !archivo.isFile()) {
+                            JOptionPane.showMessageDialog(null, modeloE.Exportar(archivo, tabla_cliente) + "\nFormato ."
+                                + archivo.getName().substring(archivo.getName().lastIndexOf(".") + 1));
+                            salir = true;
+                        } else {
+                            if (JOptionPane.showConfirmDialog(null, "Archivo existente.\n ¿Desea reemplazar?", "Archivo existente", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE)== 0 ) {
+                                JOptionPane.showMessageDialog(null, modeloE.Exportar(archivo, tabla_cliente) + "\nFormato ."
+                                + archivo.getName().substring(archivo.getName().lastIndexOf(".") + 1));
+                                salir = true;
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Elija un formato válido.");
+                    }
+                } else {
+                    salir = true;
                 }
             }
         } else {
-
+            JOptionPane.showMessageDialog(null, "No hay registros a exportar.");
         }
-    }
+    }//GEN-LAST:event_btnExportarActionPerformed
 
-    public void buscar_cliente() {
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        exit();
+    }//GEN-LAST:event_formWindowClosing
+
+    public String nombreExcel() {
+        String[] strMonths = new String[]{
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"};
+        Calendar cal = Calendar.getInstance();
+        int anio = cal.get(Calendar.YEAR);
+        //int anio = fecha.getYear();
+        String mes = strMonths[fecha.getMonth()];
+        String out = anio +" "+ mes + ".xls";
+        return out;
+    }
+    
+    public void AgregarFiltro() {
+        selecArchivo.setFileFilter(new FileNameExtensionFilter("Plantilla Excel (*.xls)(*xlsx)", "xls","xlsx"));
+    }
+    
+    public void buscarCliente() {
         try {
             if (tf_buscar.getText().length() >= 8 & tf_buscar.getText().length() <= 10) {
 
@@ -868,16 +828,127 @@ public class Ingresos extends javax.swing.JFrame {
             }
         }
     }
-
-    public void eliminar() {
+    
+    public void modelarTabla() {
+        /* hace referencia a mostrar los ingreso diario en la tabla */
         try {
-            Integer id = (Integer) Tabla_cliente.getValueAt(Tabla_cliente.getSelectedRow(), 0);
+            modelo = (new DefaultTableModel(null, new String[]{"ID", "Fecha", "N°Factura", "RUT", "Nombre", "Domicilio", "Valor", "5k", "11k", "15k", "45k", "15k Al", "15k Fe", "5k C", "11k C", "15k C", "45k C"}) {
+                Class[] types = new Class[]{java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class};
+                boolean[] canEdit = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tabla_cliente.setModel(modelo);
+            tabla_cliente.getColumnModel().getColumn(0).setPreferredWidth(60);
+            tabla_cliente.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tabla_cliente.getColumnModel().getColumn(2).setPreferredWidth(90);
+            tabla_cliente.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tabla_cliente.getColumnModel().getColumn(4).setPreferredWidth(200);
+            tabla_cliente.getColumnModel().getColumn(5).setPreferredWidth(200);
+            tabla_cliente.getColumnModel().getColumn(6).setPreferredWidth(80);
+            tabla_cliente.getColumnModel().getColumn(7).setPreferredWidth(50);
+            tabla_cliente.getColumnModel().getColumn(8).setPreferredWidth(50);
+            tabla_cliente.getColumnModel().getColumn(9).setPreferredWidth(50);
+            tabla_cliente.getColumnModel().getColumn(10).setPreferredWidth(50);
+            tabla_cliente.getColumnModel().getColumn(11).setPreferredWidth(50);
+            tabla_cliente.getColumnModel().getColumn(12).setPreferredWidth(50);
+            tabla_cliente.getColumnModel().getColumn(13).setPreferredWidth(50);
+            tabla_cliente.getColumnModel().getColumn(14).setPreferredWidth(50);
+            tabla_cliente.getColumnModel().getColumn(15).setPreferredWidth(50);
+            tabla_cliente.getColumnModel().getColumn(16).setPreferredWidth(50);
+            
+            
+            Object[] obj = new Object[17];
+            ClienteJpaController jpa = new ClienteJpaController(Entity.getEntityManagerFactory());
+            List<Cliente> uni = jpa.findClienteEntities();
+            Cliente cli = new Cliente();
+            for (int i = 0; i < 4; i++) {
+                cli = (Cliente) uni.get(i);
+                obj[0] = cli.getId();
+                obj[1] = cli.getFecha();
+                obj[2] = cli.getFactura();
+                obj[3] = cli.getRut();
+                obj[4] = cli.getNombre();
+                obj[5] = cli.getDomicilio();
+                obj[6] = cli.getValorFactura();
+                obj[7] = cli.getK();
+                obj[8] = cli.getK1();
+                obj[9] = cli.getK2();
+                obj[10] = cli.getK3();
+                obj[11] = cli.getKAl();
+                obj[12] = cli.getKFe();
+                obj[13] = cli.getKCat();
+                obj[14] = cli.getKCat1();
+                obj[15] = cli.getKCat2();
+                obj[16] = cli.getKCat3();
+                modelo.addRow(obj);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    public void guardarRegistro() {
+        Object[] opciones = {"Enviar", "Revisar"};
+        int eleccion = JOptionPane.showOptionDialog(rootPane, "¿Desea Enviar la  Información?", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
+        if (eleccion == JOptionPane.YES_OPTION) {
+            try {
+                ClienteJpaController clienteController = new ClienteJpaController(Entity.getEntityManagerFactory());
+                Cliente cli = new Cliente();
+                cli.setFecha(tf_fecha.getText());
+                cli.setFactura(tf_factura.getText());
+                cli.setRut(tf_rut.getText());
+                cli.setNombre(tf_nombre.getText());
+                cli.setDomicilio(tf_domicilio.getText());
+                cli.setValorFactura(Integer.parseInt(tf_valor.getText()));
+                cli.setK(tf_5k.getText());
+                cli.setK1(tf_11k.getText());
+                cli.setK2(tf_15k.getText());
+                cli.setK3(tf_45k.getText());
+                cli.setKAl(tf_15kal.getText());
+                cli.setKFe(tf_15kFe.getText());
+                cli.setKCat(tf_5kc.getText());
+                cli.setKCat1(tf_11kc.getText());
+                cli.setKCat2(tf_15kc.getText());
+                cli.setKCat3(tf_45kc.getText());
+                clienteController.create(cli);
+                
+                modelo.addRow(cli.toRow());
+                tabla_cliente.setModel(modelo);
+                
+                JOptionPane.showMessageDialog(this, "Registro Ingresado!");
+                limpiar();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Existen Campos vacios, por favor revisa tu información!");
+                
+            }
+        } else {
+
+        }
+    }
+
+    public void eliminarRegistro() {
+        try {
+            Integer id = (Integer) tabla_cliente.getValueAt(tabla_cliente.getSelectedRow(), 0);
             ClienteJpaController prd = new ClienteJpaController(Entity.getEntityManagerFactory());
             int Confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (Confirmacion == 0) {
                 if (id != null) {
                     prd.destroy(id);
-                    this.mostrarTabla();
+                    int fila = tabla_cliente.getSelectedRow();
+                    if (fila >= 0) {
+                        modelo.removeRow(fila);
+                    }
                     JOptionPane.showMessageDialog(null, "Se ha eliminado el Registro");
                 }
             }
@@ -886,7 +957,7 @@ public class Ingresos extends javax.swing.JFrame {
         }
     }
 
-    public void cargarCliente(Cliente c) {
+    public void cargarRegistro(Cliente c) {
         lb_id.setText(c.getId().toString());
         tf_fecha.setText(c.getFecha());
         tf_factura.setText(c.getFactura());
@@ -907,10 +978,8 @@ public class Ingresos extends javax.swing.JFrame {
     }
 
     public void limpiar() {
-        Date fecha = new Date();
-        SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
         lb_id.setText("");
-        tf_fecha.setText(dt1.format(fecha));
+        tf_fecha.setText(date);
         tf_factura.setText("");
         tf_rut.setText("");
         tf_nombre.setText("");
@@ -937,13 +1006,7 @@ public class Ingresos extends javax.swing.JFrame {
         }
     }
 
-    public void AgregarFiltro() {
-        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xls)", "xls"));
-        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xlsx)", "xlsx"));
-    }
-
     public void GuardarTabla() {
-
         try {
 
             ClienteJpaController jpa = new ClienteJpaController(Entity.getEntityManagerFactory());
@@ -951,16 +1014,25 @@ public class Ingresos extends javax.swing.JFrame {
             String[] Datos = new String[17];
             Datos[0] = tf_factura.getText();
             Datos[1] = tf_fecha.getText();
-            modelo1.addRow(Datos);
+            modelo.addRow(Datos);
 
         } catch (Exception e) {
             if (e.equals(e)) {
                 JOptionPane.showMessageDialog(this, "Existen Campos vacios, por favor revisa tu información!");
             }
         }
-
     }
 
+    public void exit(){
+        Object [] opciones ={"Salir","Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Desea cerrar la aplicación?","Mensaje de Confirmacion",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+        if (eleccion == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -996,11 +1068,8 @@ public class Ingresos extends javax.swing.JFrame {
         });
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.Query Consulta;
     private javax.persistence.EntityManager Entity;
-    public javax.swing.JTable Tabla_cliente;
     private javax.swing.JButton bt_buscar;
     private javax.swing.JButton bt_editar;
     private javax.swing.JButton bt_eliminar;
@@ -1034,7 +1103,7 @@ public class Ingresos extends javax.swing.JFrame {
     public javax.swing.JPanel jPanel6;
     public javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lb_id;
-    private javax.persistence.Query query1;
+    public javax.swing.JTable tabla_cliente;
     private javax.swing.JTextField tf_11k;
     private javax.swing.JTextField tf_11kc;
     private javax.swing.JTextField tf_15k;

@@ -227,6 +227,11 @@ public class Cliente implements Serializable {
         this.kCat3 = kCat3;
     }
 
+    public Object[] toRow(){
+        Object[] obj = new Object[]{id,fecha,factura,rut,nombre,domicilio,valorFactura,k,k1,k2,k3,kAl,kFe,kCat,kCat1,kCat2,kCat3};
+        return obj;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
