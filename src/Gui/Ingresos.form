@@ -47,8 +47,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
           <Component id="jPanel5" alignment="1" max="32767" attributes="0"/>
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -112,7 +112,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="tf_buscar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="199339982"/>
             <Property name="toolTipText" type="java.lang.String" value="Ingrese RUT sin puntos ni guion"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[9, 9]"/>
@@ -264,9 +263,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tf_factura">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="2"/>
-          </Properties>
           <Events>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_facturaKeyTyped"/>
           </Events>
@@ -278,9 +274,6 @@
         <Component class="javax.swing.JTextField" name="tf_domicilio">
         </Component>
         <Component class="javax.swing.JTextField" name="tf_valor">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="68000"/>
-          </Properties>
           <Events>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_valorKeyTyped"/>
           </Events>
@@ -298,8 +291,8 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="1316" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="1317" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -308,8 +301,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="267" max="-2" attributes="0"/>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="216" max="-2" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -461,15 +454,17 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="bt_guardar" min="-2" pref="186" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="bt_eliminar" min="-2" pref="160" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="bt_eliminar" min="-2" pref="186" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="bt_editar" min="-2" pref="140" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Component id="bt_guardarcambios" min="-2" pref="160" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="464" max="-2" attributes="0"/>
-                  <Component id="btnExportar" min="-2" pref="141" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="bt_guardarcambios" min="-2" pref="140" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="339" max="-2" attributes="0"/>
+                  <Component id="bt_importar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="bt_exportar" min="-2" pref="141" max="-2" attributes="0"/>
+                  <EmptySpace pref="50" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
@@ -525,7 +520,8 @@
                       <Component id="bt_eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bt_editar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bt_guardarcambios" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnExportar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="bt_exportar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="bt_importar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="313" max="-2" attributes="0"/>
               </Group>
@@ -642,7 +638,7 @@
                       <Component id="tf_15kc" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="tf_45kc" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace pref="753" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -669,7 +665,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextField" name="tf_5k">
               <Properties>
-                <Property name="text" type="java.lang.String" value="1"/>
+                <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_5kKeyTyped"/>
@@ -677,7 +673,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tf_11k">
               <Properties>
-                <Property name="text" type="java.lang.String" value="1"/>
+                <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_11kKeyTyped"/>
@@ -685,7 +681,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tf_15k">
               <Properties>
-                <Property name="text" type="java.lang.String" value="2"/>
+                <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
@@ -752,6 +748,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="bt_guardar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="dd" green="a5" red="a5" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Guardar Informaci&#xf3;n"/>
           </Properties>
           <Events>
@@ -760,6 +759,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="bt_eliminar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="9e" green="9e" red="d5" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Eliminar Informaci&#xf3;n "/>
           </Properties>
           <Events>
@@ -784,16 +786,24 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_guardarcambiosActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnExportar">
+        <Component class="javax.swing.JButton" name="bt_exportar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Exportar A  Excel"/>
+            <Property name="text" type="java.lang.String" value="Exportar a  Excel"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_exportarActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="bt_importar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Importar desde Excel"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_importarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
