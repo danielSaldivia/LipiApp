@@ -115,6 +115,7 @@ public class Ingresos extends javax.swing.JFrame {
         bt_guardarcambios = new javax.swing.JButton();
         bt_exportar = new javax.swing.JButton();
         bt_importar = new javax.swing.JButton();
+        bt_limpiar = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -518,6 +519,13 @@ public class Ingresos extends javax.swing.JFrame {
             }
         });
 
+        bt_limpiar.setText("Limpiar");
+        bt_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_limpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -531,11 +539,13 @@ public class Ingresos extends javax.swing.JFrame {
                 .addComponent(bt_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_guardarcambios, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(339, 339, 339)
+                .addGap(260, 260, 260)
+                .addComponent(bt_limpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_importar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_exportar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                 .addGap(94, 94, 94)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -586,7 +596,8 @@ public class Ingresos extends javax.swing.JFrame {
                     .addComponent(bt_editar)
                     .addComponent(bt_guardarcambios)
                     .addComponent(bt_exportar)
-                    .addComponent(bt_importar))
+                    .addComponent(bt_importar)
+                    .addComponent(bt_limpiar))
                 .addGap(313, 313, 313))
         );
 
@@ -755,6 +766,8 @@ public class Ingresos extends javax.swing.JFrame {
             //Aqui se ejecuta la ventana...
             while (salir == false){
                 if (selecArchivo.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    selecArchivo.setSelectedFile(selecArchivo.getSelectedFile());
+                    archivo = selecArchivo.getSelectedFile();
                     if (archivo.getName().endsWith("xls") || archivo.getName().endsWith("xlsx")) {
                         //Esta linea llama al método que crea el archivo
                         if (!archivo.exists() & !archivo.isFile()) {
@@ -814,6 +827,20 @@ public class Ingresos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_bt_importarActionPerformed
+
+    private void bt_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_limpiarActionPerformed
+        int fila = tabla_cliente.getRowCount();
+        if (fila > 0) {
+            for (int i = 0; i < tabla_cliente.getRowCount(); i++) {
+                modelo.removeRow(i);
+                i -= 1;
+            }
+            JOptionPane.showMessageDialog(null, "Datos limpiados correctamente");
+        }else{
+              JOptionPane.showMessageDialog(null, "No existen datos en la tabla");
+                    }
+        modelarTabla();
+    }//GEN-LAST:event_bt_limpiarActionPerformed
 
     public String nombreExcel() {
         String[] strMonths = new String[]{
@@ -1140,6 +1167,7 @@ public class Ingresos extends javax.swing.JFrame {
     private javax.swing.JButton bt_guardar;
     private javax.swing.JButton bt_guardarcambios;
     private javax.swing.JButton bt_importar;
+    private javax.swing.JButton bt_limpiar;
     private javax.persistence.EntityManager em;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
