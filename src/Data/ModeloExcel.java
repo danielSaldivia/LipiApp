@@ -99,8 +99,7 @@ public class ModeloExcel {
                         Font font = wb.createFont ();
                         font.setBold(true);
                         style.setFont(font);
-                        style.setFillForegroundColor(IndexedColors.GOLD.getIndex());
-                        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+                        style.setFillForegroundColor(IndexedColors.WHITE.getIndex());
                         celda.setCellStyle(style);
                     }else{ 
                         if (j != 0 && j != 2 && j != 3 && j != 6 && j != 7 && j != 8 && j != 9 && j != 10 && j != 11
