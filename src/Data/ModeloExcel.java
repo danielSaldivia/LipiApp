@@ -95,7 +95,12 @@ public class ModeloExcel {
                 for (int j = 0; j < numColumna; j++) {
                     Cell celda = fila.createCell(j);
                     if(i==-1){
-                        celda.setCellValue(String.valueOf(tablaD.getColumnName(j)));
+                        
+                        if (j != 7 && j != 8 && j != 9 && j != 10 &&  j != 13 && j != 14 && j != 15 && j != 16) {
+                            celda.setCellValue(String.valueOf(tablaD.getColumnName(j)));
+                        } else {
+                            celda.setCellValue(Double.parseDouble(tablaD.getColumnName(j).toString()));
+                        }
                         Font font = wb.createFont ();
                         font.setBold(true);
                         style.setFont(font);
