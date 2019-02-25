@@ -897,8 +897,8 @@ public class Ingresos extends javax.swing.JFrame {
     public void modelarTabla() {
         /* hace referencia a mostrar los ingreso diario en la tabla */
         try {
-            modelo = (new DefaultTableModel(null, new String[]{"ID", "Fecha", "N°Factura", "RUT", "Nombre", "Domicilio", "Valor", "5k", "11k", "15k", "45k", "15k Al", "15k Fe", "5k C", "11k C", "15k C", "45k C"}) {
-                Class[] types = new Class[]{java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class};
+            modelo = (new DefaultTableModel(null, new String[]{"ID", "Fecha", "N°Factura", "RUT", "Nombre", "Domicilio", "Valor Factura", "5", "11", "15", "45", "15 Al", "15 Fe", "5" , "11", "15", "45"}) {
+                Class[] types = new Class[]{java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class};
                 boolean[] canEdit = new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
 
                 @Override
